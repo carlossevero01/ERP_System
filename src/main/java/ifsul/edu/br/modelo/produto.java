@@ -12,7 +12,7 @@ public class produto {
                 '}';
     }
 
-    public produto(String id, String name) {
+    public void prod(String id, String name) {
         this.id = id;
         this.name = name;
     }
