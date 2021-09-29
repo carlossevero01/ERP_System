@@ -3,18 +3,17 @@ package ifsul.edu.br.modelo;
 public class produto {
     private String id;
     private String name;
+    private String date;
+    private int quantidade;
 
     @Override
     public String toString() {
         return "produto{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
+                ", date='" + date + '\'' +
+                ", quantidade=" + quantidade +
                 '}';
-    }
-
-    public void prod(String id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public String getId() {
@@ -32,4 +31,12 @@ public class produto {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getDate() { return date; }
+
+    public void setDate(String date) { this.date = date; }
+
+    public int getQuantidade() { return quantidade; }
+
+    public void setQuantidade(int quantidade) { this.quantidade = quantidade; }
 }
