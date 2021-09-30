@@ -51,11 +51,15 @@ public class produto {
 
     public void criarQueue(int q) {
         int dia,mes,ano;
+        dia = random.nextInt(29) + 1;
+        mes= random.nextInt(11)+1;
+        ano= random.nextInt(21) + 2000;
         for(int i=1;i<=q;i++){
-            dia = random.nextInt(29) + 1;
-            mes= random.nextInt(11)+1;
-            ano= random.nextInt(21) + 2000;
+
             queue.add(dia+"/"+mes+"/"+ano);
+            dia++;
+            mes++;
+            ano++;
         }
     }
 

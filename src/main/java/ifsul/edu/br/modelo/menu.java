@@ -88,10 +88,12 @@ public class menu {
                                 " | Qnt:"+getlist().get(index).getQuantidade());
                         if(getlist().get(index).getQuantidade()<qnt){
                             System.out.println("Tirar a quantidade disponivel?");
-                            if(scb.nextLine()=="y"){
+                            cp=scb.nextLine();
+                            if(cp=="y"){
                                 getlist().get(index).retirarQuantidade(getlist().get(index).getQuantidade());
+                                System.out.println("Lista do estoque desse produto por data:"+getlist().get(index).getQueue().toString());
                                 for(int i=0;i<getlist().get(index).getQuantidade();i++){
-                                    System.out.println(getlist().get(index).getQueue().peek());
+                                    System.out.println("Produto cuja data é "+getlist().get(index).getQueue().peek()+"foi removido");
                                     getlist().get(index).getQueue().remove();
 
                                 }
@@ -102,8 +104,9 @@ public class menu {
                         }
                         else{
                             getlist().get(index).retirarQuantidade(qnt);
+                            System.out.println("Lista do estoque desse produto por data:"+getlist().get(index).getQueue().toString());
                             for(int i=0;i<qnt;i++){
-                                System.out.println(getlist().get(index).getQueue().peek());
+                                System.out.println("Produto cuja data é "+getlist().get(index).getQueue().peek()+"foi removido");
                                 getlist().get(index).getQueue().remove();
                             }
                         }
