@@ -3,9 +3,7 @@ package ifsul.edu.br.modelo;
 
 import example_read_csv.principal;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class menu {
     public static List<produto> list = new ArrayList<produto>();
@@ -67,12 +65,49 @@ public class menu {
                 case 3:
                     Scanner scb= new Scanner(System.in);
                     String cp;
-                    int qnt;
+                    int qnt=0,index=0;
+                    exist = false;
                     System.out.println("Insira o codigo do produto:");
                     cp= scb.nextLine();
                     System.out.println("Insira a quantidade desejada:");
                     qnt= scb.nextInt();
+                    cp.replace(" ","");
+                    for (int i = 0; i < getlist().size(); i++) {
+                        if (getlist().get(i).getId().equalsIgnoreCase(cp)) {
+                            index=i;
+                            exist = true;
+                        }
 
+                    }
+                    if (exist == false) {
+                        System.out.println("Nenhum objeto encontrado");
+                    }
+                    else{
+                        System.out.println("ID:" + getlist().get(index).getId() +
+                                " | Nome:" +getlist().get(index).getName()+
+                                " | Qnt:"+getlist().get(index).getQuantidade());
+                        if(getlist().get(index).getQuantidade()<qnt){
+                            System.out.println("Tirar a quantidade disponivel?");
+                            if(scb.nextLine()=="y"){
+                                getlist().get(index).retirarQuantidade(getlist().get(index).getQuantidade());
+                                for(int i=0;i<getlist().get(index).getQuantidade();i++){
+                                    System.out.println(getlist().get(index).getQueue().peek());
+                                    getlist().get(index).getQueue().remove();
+
+                                }
+                            }
+                            else{
+                                System.out.println("Retirada Cancelada");
+                            }
+                        }
+                        else{
+                            getlist().get(index).retirarQuantidade(qnt);
+                            for(int i=0;i<qnt;i++){
+                                System.out.println(getlist().get(index).getQueue().peek());
+                                getlist().get(index).getQueue().remove();
+                            }
+                        }
+                    }
                     break;
                 case 5:
                     Scanner scg= new Scanner(System.in);
