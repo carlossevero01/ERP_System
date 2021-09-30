@@ -64,6 +64,7 @@ public class menu {
                     break;
                 case 3:
                     Scanner scb= new Scanner(System.in);
+                    Scanner scc= new Scanner(System.in);
                     String cp;
                     int qnt=0,index=0;
                     exist = false;
@@ -86,29 +87,32 @@ public class menu {
                         System.out.println("ID:" + getlist().get(index).getId() +
                                 " | Nome:" +getlist().get(index).getName()+
                                 " | Qnt:"+getlist().get(index).getQuantidade());
-                        if(getlist().get(index).getQuantidade()<qnt){
-                            System.out.println("Tirar a quantidade disponivel?");
-                            cp=scb.nextLine();
-                            if(cp=="y"){
+                        if(getlist().get(index).getQuantidade()<qnt&&qnt!=0){               //Quantidade insuficiente
+                            System.out.println("Tirar a quantidade disponivel?[y]sim ou insira qualquer coisa para cancelar");
+                            cp=scc.nextLine();
+                            if(cp.equalsIgnoreCase("y")||cp.equalsIgnoreCase("sim")){
                                 getlist().get(index).retirarQuantidade(getlist().get(index).getQuantidade());
-                                System.out.println("Lista do estoque desse produto por data:"+getlist().get(index).getQueue().toString());
-                                for(int i=0;i<getlist().get(index).getQuantidade();i++){
-                                    System.out.println("Produto cuja data é "+getlist().get(index).getQueue().peek()+"foi removido");
-                                    getlist().get(index).getQueue().remove();
+                                System.out.println("Lista de produtos removidos do estoque por data:"+getlist().get(index).getQueue().toString());
+                              //  for(int i=0;i<getlist().get(index).getQuantidade();i++){
 
-                                }
+                                    getlist().get(index).getQueue().clear();
+
+                            //    }
                             }
                             else{
                                 System.out.println("Retirada Cancelada");
                             }
                         }
-                        else{
+                        else if(getlist().get(index).getQuantidade()>=qnt&&qnt!=0){     //pode ser removido
                             getlist().get(index).retirarQuantidade(qnt);
                             System.out.println("Lista do estoque desse produto por data:"+getlist().get(index).getQueue().toString());
                             for(int i=0;i<qnt;i++){
-                                System.out.println("Produto cuja data é "+getlist().get(index).getQueue().peek()+"foi removido");
+                                System.out.println("Produto cuja data é "+getlist().get(index).getQueue().peek()+" foi removido");
                                 getlist().get(index).getQueue().remove();
                             }
+                        }
+                        else if(qnt==0){                                                // retirada de 0
+                            System.out.println("A quantidade de 0 foi removido");
                         }
                     }
                     break;
